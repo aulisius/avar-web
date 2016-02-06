@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <ul>
+    <% result.forEach(function (ele) { %>
+        <li> <%= ele.id %> - <%= ele.name %> </li>
+    <% }) %>
+    </ul>
+  </body>
+</html>
