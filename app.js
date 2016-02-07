@@ -8,7 +8,6 @@ const express = require('express'),
     bodyParser = require('body-parser'),
     index = require('./routes/index'),
     db = require('./routes/db'),
-    register = require('./routes/register'),
     report = require('./routes/report')
 
 let app = express()
@@ -27,7 +26,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/', index)
 app.use('/db', db)
-app.use('/register', register)
 app.use('/report', report)
 
 // catch 404 and forward to error handler

@@ -12,7 +12,7 @@ let config = {
 let db = pg(process.env.DATABASE_URL || config)
 
 router.get('/new', (request, response) => {
-    console.log(request.query)
+    console.log(request.query.uuid)
     /*db.any('SELECT * FROM test_table')
         .then(data =>
             response.render('db', {

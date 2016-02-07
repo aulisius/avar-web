@@ -1,14 +1,14 @@
 'use strict'
 
-module.exports = function (db) {
-    return {
-        add: body => db.none('INSERT INTO test_table(id, name) VALUES(${id}, ${name})', body),
+module.exports = (db) => ({
+    
+    add: body => db.none('INSERT INTO users(uuid, name, address, car) VALUES(${uuid}, ${name}, ${address}, ${car})', body),
 
-        remove: id => db.result("DELETE FROM test_table WHERE id=$1", id)
-            .then((result) => result.rowCount === 1),
+    remove: uuid => db.result("DELETE FROM users WHERE uuid LIKE '$1^'", uuid)
+        .then((result) => result.rowCount === 1),
 
-        find: id => db.oneOrNone("SELECT * FROM test_table WHERE id = $1", id),
+    find: uuid => db.oneOrNone("SELECT * FROM users WHERE uuid LIKE '$1^'", uuid),
 
-        all: () => db.any("SELECT * FROM test_table")
-    }
-}
+    all: () => db.any("SELECT * FROM users")
+    
+})
