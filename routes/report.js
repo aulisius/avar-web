@@ -3,13 +3,13 @@
 const router = require('express').Router(),
     pg = require('pg-promise')()
 
-let cn = {
+let config = {
     host: 'localhost', 
     port: 5432,
     database: 'postgres',
 }
 
-let db = pg(process.env.DATABASE_URL || cn)
+let db = pg(process.env.DATABASE_URL || config)
 
 router.get('/new', (request, response) => {
     console.log(request.query)

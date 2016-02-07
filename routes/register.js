@@ -1,31 +1,24 @@
 'use strict'
 
-const router = require('express').Router(),
-    pg = require('pg-promise')()
-
-let cn = {
+let config = {
     host: 'localhost',
     port: 5432,
     database: 'postgres',
 }
 
-let db = pg(process.env.DATABASE_URL || cn)
+const router = require('express').Router()
 
-router.post('/new', (request, response) => {
-    console.log(request.body)
-    /*db.any('SELECT * FROM test_table')
-        .then(data =>
-            response.render('db', {
-                result: data
-            })
-            )
-        .catch(error =>
-            response.render('error', {
-                error: error,
-                message: error.message
-            })
-            )
-            */
-})
+const db = require('pg-promise')({
+    extend: function () {
+        this.user = require('../repo/user')(this)
+    }
+})(process.env.DATABASE_URL || config)
+
+router.post('/new', (request, response) =>
+    db.user
+        .add(request.body)
+        .then(() => response.sendStatus(200).end())
+        .catch(() => response.sendStatus(400).end())
+    )
 
 module.exports = router
