@@ -8,17 +8,22 @@ let config = {
 
 const router = require('express').Router()
 
+let repos = {
+    user: require('../repo/user'),
+    report: require('../repo/report')
+}
+
 const db = require('pg-promise')({
-    extend: function () {
-        this.user = require('../repo/user')(this),
-        this.report = require('../repo/report')(this)
+    extend: db => {
+        db.user = repos.user(db),
+        db.report = repos.report(db)
     }
 })(process.env.DATABASE_URL || config)
 
 router.get('/', (request, response) =>
     db.user
         .all()
-        .then(data => response.json(data).end())
+        .then(res => response.json({ data: res }).end())
         .catch(error =>
             response.render('error', {
                 error: error,
@@ -46,6 +51,7 @@ router.post('/new', (request, response) =>
  * uuid: alphanumeric
  * latX: double
  * latY: double
+ * time: milliseconds
  */
 router.post('/report', (request, response) =>
     db.report
