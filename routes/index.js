@@ -2,7 +2,7 @@
 
 const router = require('express').Router()
 
-router.get('/', (req, res, next) => 
+router.get('/', (_, res) => 
   res.render('index', {
       title : "Express"
   })

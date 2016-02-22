@@ -37,23 +37,23 @@ app.use((req, res, next) => {
 
 // error handlers
 // development error handler
-if (app.get('env') === 'development') 
+if (app.get('env') === 'development')
     app.use((err, req, res, next) => {
         res.status(err.status || 500)
-        res.render('error', {
-            message: err.message,
-            error: err
-        })
+            .render('error', {
+                message: err.message,
+                error: err
+            })
     })
 
 
 // production error handler
 app.use((err, req, res, next) => {
     res.status(err.status || 500)
-    res.render('error', {
-        message: err.message,
-        error: {}
-    })
+        .render('error', {
+            message: err.message,
+            error: {}
+        })
 })
 
 

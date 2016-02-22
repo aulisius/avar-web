@@ -2,5 +2,5 @@
   "name": "automatic-report",
   "description": "AVAR",
   "repository": "https://github.com/faizaanceg/avar",
-  "keywords": ["node", "express", "static"]
+  "keywords": ["node", "express", "static", "pgsql"]
 }
