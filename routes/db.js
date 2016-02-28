@@ -61,12 +61,12 @@ router.post('/report', (request, response) =>
     )
 
 /*
- * query format
+ * params format
  * uuid: alphanumeric 
  */
-router.delete('/remove', (request, response) =>
+router.delete('/remove/:uuid', (request, response) =>
     db.user
-        .remove(request.query.uuid)
+        .remove(request.params.uuid)
         .then(done => response.sendStatus(done ? 204 : 404).end())
         .catch(error => response.sendStatus(400).end())
     )

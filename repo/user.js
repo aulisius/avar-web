@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = (db) => ({
+module.exports = db => ({
     
     add: body => db.none('INSERT INTO users(uuid, name, address, car) VALUES(${uuid}, ${name}, ${address}, ${car})', body),
 

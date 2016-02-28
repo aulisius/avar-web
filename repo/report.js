@@ -1,6 +1,6 @@
 'use strict'
 
-module.exports = (db) => ({
+module.exports = db => ({
     
     add: body => db.none('INSERT INTO accident(uuid, latX, latY, time) VALUES(${uuid}, ${latX}, ${latY}, ${time})', body),
 
