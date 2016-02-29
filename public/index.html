@@ -8,8 +8,8 @@
 
     <title>Automatic Accident Report - Users list</title>
 
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
     <style>
         html {
             overflow-y: scroll;
@@ -46,12 +46,12 @@
                 <div ng-repeat="user in users">
                     <label>
                         <input type="checkbox" ng-click="showJson(user.uuid)"> {{ user.name }}
-                        
+
                     </label>
                 </div>
 
-                {{ json }}
-                
+                <code> {{ json }} </code>
+
                 <p class="text-center" ng-show="loading">
                     <span class="fa fa-spinner fa-spin fa-3x"></span>
                 </p>
@@ -59,22 +59,7 @@
             </div>
         </div>
 
-<!--        <div id="todo-form" class="row">
-            <div class="col-sm-8 col-sm-offset-2 text-center">
-                <form>
-                    <div class="form-group">
 
-                        <!-- BIND THIS VALUE TO formData.text IN ANGULAR -->
-<!--                     <input type="text" class="form-control input-lg text-center" placeholder="I want to buy a puppy that will love me forever"
-                        ng-model="formData.text">
-                    </div>
-
-                    <!-- createToDo() WILL CREATE NEW TODOS -->
-<!--                    <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
-                </form>
-            </div>
-        </div>
--->
     </div>
 
 </body>

@@ -1,10 +1,21 @@
 'use strict'
 
+let config = require('../config') || {
+    host: 'localhost',
+    port: 5432,
+    database: 'postgres'
+}
+
+/*
+ * The config.json contains a JSON string in the format below
 let config = {
     host: 'localhost',
     port: 5432,
     database: 'postgres',
+    user: 'postgres',
+    password: 'postgres'
 }
+*/
 
 const router = require('express').Router()
 
@@ -21,8 +32,7 @@ const db = require('pg-promise')({
 })(process.env.DATABASE_URL || config)
 
 router.get('/', (request, response) =>
-    db.user
-        .all()
+    db.user.all()
         .then(res => response.json({ data: res }).end())
         .catch(error =>
             response.render('error', {
@@ -40,8 +50,7 @@ router.get('/', (request, response) =>
  * car: string
  */
 router.post('/new', (request, response) =>
-    db.user
-        .add(request.body)
+    db.user.add(request.body)
         .then(() => response.sendStatus(201).end())
         .catch(() => response.sendStatus(400).end())
     )
@@ -54,8 +63,7 @@ router.post('/new', (request, response) =>
  * time: milliseconds
  */
 router.post('/report', (request, response) =>
-    db.report
-        .add(request.body)
+    db.report.add(request.body)
         .then(() => response.sendStatus(201).end())
         .catch(error => response.sendStatus(400).end())
     )
@@ -65,8 +73,7 @@ router.post('/report', (request, response) =>
  * uuid: alphanumeric 
  */
 router.delete('/remove/:uuid', (request, response) =>
-    db.user
-        .remove(request.params.uuid)
+    db.user.remove(request.params.uuid)
         .then(done => response.sendStatus(done ? 204 : 404).end())
         .catch(error => response.sendStatus(400).end())
     )
@@ -76,8 +83,7 @@ router.delete('/remove/:uuid', (request, response) =>
  * uuid: alphanumeric 
  */
 router.get('/:uuid', (request, response) =>
-    db.user
-        .find(request.params.uuid)
+    db.user.find(request.params.uuid)
         .then(user => response.json(user).end())
         .catch(error => response.sendStatus(404).end())
     )
