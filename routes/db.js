@@ -1,10 +1,6 @@
 'use strict'
 
-let config = require('../config') || {
-    host: 'localhost',
-    port: 5432,
-    database: 'postgres'
-}
+let config = require('../config')
 
 /*
  * The config.json contains a JSON string in the format below
